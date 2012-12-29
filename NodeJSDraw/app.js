@@ -1,8 +1,5 @@
 
-/**
- * Module dependencies.
- */
-
+// 1. Express requires these dependencies
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
@@ -11,6 +8,7 @@ var express = require('express')
 
 var app = express();
 
+// 2. Configure our application
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
@@ -23,14 +21,17 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
+// 3. Configure error handling
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+// 4. Setup Routes
 app.get('/', routes.index);
 app.get('/users', user.list);
 
+// 5. Enable Socket.io
 var server = http.createServer(app).listen( app.get('port') );
 var io = require('socket.io').listen(server, function() {
-        console.log("Express server listening on port " + app.get('port'));
+  console.log("Express server listening on port " + app.get('port'));
 });
