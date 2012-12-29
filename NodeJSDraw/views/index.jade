@@ -1,4 +1,5 @@
 extends layout
 block content
+    h1 "Click and drag then release to draw a line of circles! :)"
     canvas(id="draw", resize="true")
     script(type="text/paperscript", src="javascripts/draw.js", canvas="draw")
